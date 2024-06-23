@@ -1,0 +1,24 @@
+<div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 justify-content-center">
+
+  @for (product of products; track $index; let dusan = $index) {
+  <div>
+    <div class="card" style="width: 18rem;">
+      <img [src]="product.image" class="card-img-top" [alt]="product.name">
+      <div class="card-body">
+        <h4 class="card-title">{{ product.name }}</h4>
+        <p class="card-text">{{ product.category }}</p>
+        <p class="card-text">{{ product.intro }}</p>
+        <p class="card-text">Stock: {{ product.qtty }}</p>
+        <h5 class="card-title">Price: {{ product.price | currency: 'EUR'}}</h5>
+        <a class="btn btn-primary" routerLink="/details/{{ dusan }}">Details</a>
+        @if (product.availability === true) {
+        <a class="btn btn-success" (click)="addToCart(dusan)">Add to cart</a>
+        } @else {
+        <!-- <a class="btn btn-secondary">Not available </a> -->
+        <span class="text-danger">Not Available</span>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

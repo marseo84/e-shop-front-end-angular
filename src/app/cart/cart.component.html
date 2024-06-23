@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="col-12 d-flex justify-content-center">
+    <h1>Cart</h1>
+  </div>
+  <div class="col-12 d-flex justify-content-center mb-5">
+    <img src="./images/shopping-cart.webp" width="150px" alt="">
+  </div>
+
+  @if (itemsCount === 0) { <div class="col-12 d-flex justify-content-center">
+    <h5>You have not added any items to the cart yet.</h5>
+  </div>
+  <div class="col-12 d-flex justify-content-center">
+    <a class="btn btn-success" routerLink="../products">GO SHOPPING!</a>
+  </div>
+  } @else {
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <div class="container border border-3 border-primary rounded">
+        <div class="row border-bottom border-2 border-primary">
+          <div class="col-9 d-flex justify-content-center">
+            <h5 class="font-weight-bold">Product </h5>
+          </div>
+          <div class="col-3">
+            <h5 class="font-weight-bold d-flex justify-content-center">Price</h5>
+          </div>
+        </div>
+
+        <!-- cart items list-->
+        @for (item of items; track $index) {
+        <div class="row mt-2">
+          <div class="col-3"><img [src]="item.image" width="50px" alt=""></div>
+          <div class="col-6">{{ item.name }}</div>
+          <div class="col-3 d-flex justify-content-center">{{ item.price | currency: "EUR" }}</div>
+        </div>
+        }
+
+        <!-- total-->
+        <div class="row border-top border-2 border-primary mt-2">
+          <div class="col-9">
+            <h5>Total: </h5>
+          </div>
+          <div class="col-3">
+            <h5 class="d-flex justify-content-center">{{ total | currency: "EUR"}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="container border border-3 border-primary rounded">
+        <div class="row border-bottom border-2 border-primary">
+          <div class="col-12 d-flex justify-content-center">
+            <h5 class="font-weight-bold">Summary</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-9">Products</div>
+          <div class="col-3 d-flex justify-content-end">{{ total | currency: "EUR" }}</div>
+        </div>
+        <div class="row">
+          <div class="col-9">Service</div>
+          <div class="col-3 d-flex justify-content-end">{{ service | currency: "EUR" }}</div>
+        </div>
+        <div class="row">
+          <div class="col-9">Discount</div>
+          <div class="col-3 d-flex justify-content-end">{{ discount | currency: "EUR" }}</div>
+        </div>
+
+        <!-- total-->
+        @if(discount === 0) {
+        <div class="row border-top border-2 border-primary mt-4">
+          <div class="col-9">
+            <h5>Total: </h5>
+          </div>
+          <div class="col-3">
+            <h5 class="d-flex justify-content-end">{{ totalAmount | currency: "EUR"}}</h5>
+          </div>
+        </div>
+        } @else {
+        <div class="row border-top border-2 border-primary mt-4">
+          <div class="col-9">
+            <h5 class="text-danger text-decoration-line-through">Total: </h5>
+          </div>
+          <div class="col-3">
+            <h5 class="d-flex justify-content-end text-danger text-decoration-line-through">{{ total + service|
+              currency: "EUR"}}</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <h5 class="text-success">Total (-15%): </h5>
+          </div>
+          <div class="col-3">
+            <h5 class="d-flex justify-content-end text-success">{{ totalAmount | currency: "EUR"}}</h5>
+          </div>
+        </div>
+        }
+
+      </div>
+    </div>
+
+
+
+  </div>
+  <!-- <div class="row border border-3 border-primary mt-8 rounded">
+    <div class="col-10 justify-content-center">
+      <h3>Contact details</h3>
+      <form [formGroup]="checkoutForm">
+              .. kids are calling, I'll make it better and nicer for the portfolio :-)
+      </form>
+    </div> 
+  </div>-->
+  }

@@ -1,0 +1,17 @@
+<div class="card" style="width: 60%;">
+  <img [src]="product.image" class="card-img-top" [alt]="product.name">
+  <div class="card-body">
+    <h4 class="card-title">{{ product.name }}</h4>
+    <p class="card-text">{{ product.category }}</p>
+    <p class="card-text">{{ product.intro }}</p>
+    <p class="card-text">{{ product.description }}</p>
+    <p class="card-text">Stock: {{ product.qtty }}</p>
+    <h5 class="card-title">Price: {{ product.price | currency: 'EUR'}}</h5>
+    @if (product.availability === true) {
+    <a class="btn btn-success" (click)="addToCart()">Add to cart</a>
+    } @else {
+    <!-- <a class="btn btn-secondary">Not available </a> -->
+    <p class="text-danger">Not Available</p>
+    }
+  </div>
+</div>
